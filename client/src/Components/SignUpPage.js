@@ -4,6 +4,7 @@ import HomePage from "./HomePage";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import checkIfUserAithenticated from "../Auth/UserAuth";
 import axios from "axios";
 
 function SignUpPage() {
@@ -12,6 +13,20 @@ function SignUpPage() {
   const [lName, setLName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  React.useEffect(() => {
+    checkIfUserAithenticated()
+      .then((resP) => {
+        if (resP != null) {
+          if (resP.data.isAuthorized === true) {
+            setIsAuthenticated(true);
+            navigate("/");
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [navigate]);
 
   const handleSubmit = () => {
     const userData = {
