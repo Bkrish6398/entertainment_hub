@@ -24,7 +24,8 @@ function HomePage() {
 
   return (
     <div>
-      This is Homepage
+      <div>This is Homepage of Ven0m</div>
+      <div>{isAuthenticated === true ? "You are loggedin" : ""}</div>
       {isAuthenticated === false ? (
         <div>
           <nav>

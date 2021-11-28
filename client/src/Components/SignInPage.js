@@ -53,6 +53,11 @@ function SignInPage() {
           setIsAuthenticated(false);
           alert("Username or Password doesn't match");
         }
+        if (resP.data.message === "Authentication failed") {
+          setIsAuthenticated(false);
+          alert("User account does't exist, please create an account");
+          navigate("/signup");
+        }
       })
       .catch((err) => {
         console.log("unable to login...", err);
