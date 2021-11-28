@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send("Homepage 2");
+  res.send("Homepage Updated");
 });
 
 module.exports = router;
