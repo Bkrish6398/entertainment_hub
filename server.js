@@ -13,7 +13,8 @@ app.use(express.json());
 
 //Server static asset if in production
 
-app.use(express.static("client/build"));
+app.use(express.static(path.join(__dirname, "/client")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
