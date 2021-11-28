@@ -13,11 +13,12 @@ app.use(express.json());
 
 //Server static asset if in production
 
-app.use(express.static(path.join(__dirname, "/client")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
 
 app.listen(process.env.PORT || PORT, () =>
   console.log("Listening to PORT: " + PORT)
