@@ -16,6 +16,7 @@ function SignUpPage() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
   React.useEffect(() => {
+    //check if user is already logged in
     checkIfUserAithenticated()
       .then((resP) => {
         if (resP != null) {
@@ -32,19 +33,48 @@ function SignUpPage() {
     const userData = {
       fName: fName,
       lName: lName,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
-    console.log("Creating new user in DB");
+
+    //check if user already exist in the DB
+    console.log(userData.email);
     axios
-      .post("/user/create/new", userData)
+      .get("/user/find/" + userData.email)
       .then((resP) => {
-        console.log("Successfully Created User");
-        navigate("/signin");
+        if (resP.data.length > 0) {
+          if (resP.data[0].email === userData.email) {
+            alert("Account already exist. Please signin");
+            navigate("/signin");
+          } else {
+            //create new user
+            axios
+              .post("/user/create/new", userData)
+              .then((resP) => {
+                alert("Your account is succesfully created, Please login");
+                navigate("/signin");
+              })
+              .catch((err) => {
+                console.log("Error while creating new user", err);
+                alert("Unable to create your account at this moment");
+              });
+          }
+        } else {
+          //create new user
+          axios
+            .post("/user/create/new", userData)
+            .then((resP) => {
+              alert("Your account is succesfully created, Please login");
+              navigate("/signin");
+            })
+            .catch((err) => {
+              console.log("Error while creating new user", err);
+              alert("Unable to create your account at this moment");
+            });
+        }
       })
       .catch((err) => {
-        console.log("Error while creating new user", err);
-        alert("Unable to create your account at this moment");
+        console.log(err);
       });
   };
 
@@ -54,21 +84,25 @@ function SignUpPage() {
       <div></div>
       <div>
         <TextField
+          required={true}
           id="outlined-fname-input"
           label="First Name"
           onChange={(e) => setFName(e.target.value)}
         />
         <TextField
+          required={true}
           id="outlined-lname-input"
           label="Last Name"
           onChange={(e) => setLName(e.target.value)}
         />
         <TextField
+          required={true}
           id="outlined-email-input"
           label="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
+          required={true}
           id="outlined-password-input"
           label="Password"
           type="password"

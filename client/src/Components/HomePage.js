@@ -8,6 +8,7 @@ function HomePage() {
   const [userRole, setUserRole] = React.useState("");
 
   React.useEffect(() => {
+    //check if user is already logged in
     var userRoleVar = localStorage.getItem("role");
     setUserRole(userRoleVar);
     checkIfUserAithenticated()
@@ -17,7 +18,6 @@ function HomePage() {
             setIsAuthenticated(true);
           }
         }
-        console.log(resP);
       })
       .catch((err) => console.log(err));
   }, []);
