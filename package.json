@@ -1,0 +1,22 @@
+{
+  "name": "entertainment_hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client  && npm run build --prefix client"
+  },
+  "author": "Ven0m",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "concurrently": "^6.4.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13",
+    "nodemon": "^2.0.15"
+  }
+}
