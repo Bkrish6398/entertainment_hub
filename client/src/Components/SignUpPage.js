@@ -44,8 +44,8 @@ function SignUpPage() {
       })
       .catch((err) => {
         console.log("Error while creating new user", err);
+        alert("Unable to create your account at this moment");
       });
-    console.log("Completed");
   };
 
   return (

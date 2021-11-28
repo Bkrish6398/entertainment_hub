@@ -52,7 +52,10 @@ function SignInPage() {
 
         console.log(resP);
       })
-      .catch((err) => console.log("unable to login...", err));
+      .catch((err) => {
+        console.log("unable to login...", err);
+        alert("Unable to login");
+      });
   };
   return (
     <div>
