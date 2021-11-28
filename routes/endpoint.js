@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/home", (req, res) => {
   res.send("Homepage Updated");
 });
 
