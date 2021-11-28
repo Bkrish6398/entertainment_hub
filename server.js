@@ -7,9 +7,17 @@ const routes = require("./routes/endpoint");
 const app = express();
 const PORT = 5000;
 
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((resp) => console.log("Connected to MongoDB Atlas Cloud"))
+  .catch((err) => console.log("MogoDB Error", err));
+
 //express
-app.use("/", routes);
 app.use(express.json());
+app.use("/", routes);
 
 //Server static asset if in production
 
