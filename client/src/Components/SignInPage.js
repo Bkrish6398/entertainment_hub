@@ -28,13 +28,14 @@ function SignInPage() {
 
   const handleSignIn = () => {
     var userCred = {
-      email: userEmail.toLowerCase,
+      email: userEmail.toLowerCase(),
       password: userPassword,
     };
     //signing user in
     axios
       .post("/user/login", userCred)
       .then((resP) => {
+        console.log(resP);
         if (resP != null) {
           if (resP.data.isAuthenticated) {
             localStorage.setItem("role", resP.data.role);
