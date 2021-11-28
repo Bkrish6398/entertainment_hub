@@ -1,3 +1,4 @@
+//check if user is already logged in
 import axios from "axios";
 var sessionToken = localStorage.getItem("token");
 const checkIfUserAithenticated = () => {

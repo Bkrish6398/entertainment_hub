@@ -12,11 +12,13 @@ function SignInPage() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
   React.useEffect(() => {
+    //check if user is already logged in
     checkIfUserAithenticated()
       .then((resP) => {
         if (resP != null) {
           if (resP.data.isAuthorized === true) {
             setIsAuthenticated(true);
+
             navigate("/");
           }
         }
@@ -26,10 +28,10 @@ function SignInPage() {
 
   const handleSignIn = () => {
     var userCred = {
-      email: userEmail,
+      email: userEmail.toLowerCase,
       password: userPassword,
     };
-    console.log("Sign in.....");
+    //signing user in
     axios
       .post("/user/login", userCred)
       .then((resP) => {
@@ -37,6 +39,7 @@ function SignInPage() {
           if (resP.data.isAuthenticated) {
             localStorage.setItem("role", resP.data.role);
             localStorage.setItem("token", resP.data.token);
+            window.location.reload();
             navigate("/");
           }
         }
@@ -49,8 +52,6 @@ function SignInPage() {
           setIsAuthenticated(false);
           alert("Username or Password doesn't match");
         }
-
-        console.log(resP);
       })
       .catch((err) => {
         console.log("unable to login...", err);
@@ -62,12 +63,14 @@ function SignInPage() {
       This is the sign in
       <div>
         <TextField
+          required={true}
           id="outlined-fname-input"
           label="Email"
           onChange={(e) => setUserEmail(e.target.value)}
         />
 
         <TextField
+          required={true}
           id="outlined-password-input"
           label="Password"
           type="password"
