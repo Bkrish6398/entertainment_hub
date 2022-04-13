@@ -118,7 +118,6 @@ router.post("/user/login", async (req, res) => {
         );
       } else {
         res.json({
-          message:
             "Password doesn't match, Please reset the password or contact support",
           isAuthenticated: false,
         });
