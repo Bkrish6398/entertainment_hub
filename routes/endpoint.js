@@ -112,7 +112,10 @@ router.post("/user/login", async (req, res) => {
           }
         );
       } else {
-        res.json({ message: "Password doesn't match", isAuthenticated: false });
+        res.json({
+          message: "Password doesn't match, Contact support.",
+          isAuthenticated: false,
+        });
       }
     } catch (err) {
       res.json({ message: "Authentication failed", isAuthenticated: false });
