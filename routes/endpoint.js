@@ -90,7 +90,10 @@ router.get("/user/find/:email", (req, res) => {
 router.post("/user/login", async (req, res) => {
   SignUpUser.find({ email: req.body.email }, async (err, doc) => {
     if (err) {
-      res.json({ message: "Can not find user", isAuthenticated: false });
+      res.json({
+        message: "Can not find user, Please register or contact support.",
+        isAuthenticated: false,
+      });
     }
 
     try {
@@ -103,32 +106,47 @@ router.post("/user/login", async (req, res) => {
           (err, token) => {
             if (err) throw err;
             res.json({
-              message: "Authentication Successfull",
+              message: "Authentication Successful",
               isAuthenticated: true,
               token: token,
               email: req.body.email,
               role: doc[0].role,
+              firstName: doc[0].fName,
+              lastName: doc[0].lName,
             });
           }
         );
       } else {
-        res.json({ message: "Password doesn't match", isAuthenticated: false });
+        res.json({
+          message:
+            "Password doesn't match, Please reset the password or contact support",
+          isAuthenticated: false,
+        });
       }
     } catch (err) {
-      res.json({ message: "Authentication failed", isAuthenticated: false });
+      res.json({
+        message: "Authentication failed, Please contact support",
+        isAuthenticated: false,
+      });
     }
-  }).select("email password role");
+  }).select("email password role fName lName");
 });
 
 const verifyToken = (req, res, next) => {
   const token = req.headers["x-access-token"];
 
   if (!token) {
-    res.json({ message: "Your are not authorized", isAuthorized: false });
+    res.json({
+      message: "Your are not authorized, Please contact support.",
+      isAuthorized: false,
+    });
   } else {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
-        res.json({ message: "Your are not authorized", isAuthorized: false });
+        res.json({
+          message: "Your are not authorized, Please contact support.",
+          isAuthorized: false,
+        });
       } else {
         req.email = decoded.email;
         next();
