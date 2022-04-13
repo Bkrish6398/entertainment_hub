@@ -40,6 +40,9 @@ function SignInPage() {
           if (resP.data.isAuthenticated) {
             localStorage.setItem("role", resP.data.role);
             localStorage.setItem("token", resP.data.token);
+            localStorage.setItem("firstName", resP.data.firstName);
+            localStorage.setItem("lastName", resP.data.lastName);
+            localStorage.setItem("email", resP.data.email);
             window.location.reload();
             navigate("/");
           }

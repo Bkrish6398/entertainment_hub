@@ -6,6 +6,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import checkIfUserAithenticated from "../Auth/UserAuth";
 import axios from "axios";
+import * as yup from "yup";
+import { Formik } from "formik";
+import Box from "@mui/material/Box";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -14,6 +17,12 @@ function SignUpPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  let schema = yup.object().shape({
+    fName: yup.string().required(),
+    lName: yup.string().required(),
+    email: yup.string().email(),
+  });
 
   React.useEffect(() => {
     //check if user is already logged in
@@ -83,40 +92,58 @@ function SignUpPage() {
       Sign up Page
       <div></div>
       <div>
-        <TextField
-          required={true}
-          id="outlined-fname-input"
-          label="First Name"
-          onChange={(e) => setFName(e.target.value)}
-        />
-        <TextField
-          required={true}
-          id="outlined-lname-input"
-          label="Last Name"
-          onChange={(e) => setLName(e.target.value)}
-        />
-        <TextField
-          required={true}
-          id="outlined-email-input"
-          label="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          required={true}
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button variant="outlined" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </div>
-      <div>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            required={true}
+            id="outlined-fname-input"
+            label="First Name"
+            onChange={(e) => setFName(e.target.value)}
+          />
+          <TextField
+            required={true}
+            id="outlined-lname-input"
+            label="Last Name"
+            onChange={(e) => setLName(e.target.value)}
+          />
+        </Box>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            required={true}
+            id="outlined-email-input"
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            required={true}
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Box>
+        <div>
+          <Button variant="outlined" onClick={handleSubmit}>
+            Submit
+          </Button>
+          <Button variant="outlined" href="/">
+            Home
+          </Button>
+        </div>
       </div>
     </div>
   );
