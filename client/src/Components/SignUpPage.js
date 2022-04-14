@@ -9,6 +9,14 @@ import axios from "axios";
 import * as yup from "yup";
 import { Formik } from "formik";
 import Box from "@mui/material/Box";
+import logo from "../Media/Ludo E-Sports-logos_transparent_Resized2.png";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import NavMenu from "./NavMenu";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -17,6 +25,7 @@ function SignUpPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [loggedInUser, setLoggedInUser] = React.useState({});
 
   let schema = yup.object().shape({
     fName: yup.string().required(),
@@ -31,6 +40,14 @@ function SignUpPage() {
         if (resP != null) {
           if (resP.data.isAuthorized === true) {
             setIsAuthenticated(true);
+            var userInfo = {
+              firstName: localStorage.getItem("firstName"),
+              lastName: localStorage.getItem("lastName"),
+              role: localStorage.getItem("role"),
+              email: localStorage.getItem("email"),
+            };
+
+            setLoggedInUser(userInfo);
             navigate("/");
           }
         }
@@ -89,6 +106,7 @@ function SignUpPage() {
 
   return (
     <div className="App">
+      <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />
       Sign up Page
       <div></div>
       <div>

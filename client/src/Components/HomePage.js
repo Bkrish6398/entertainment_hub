@@ -35,23 +35,6 @@ function HomePage() {
       .catch((err) => console.log(err));
   }, []);
 
-  // return (
-  //   <div>
-  //     <div>This is Homepage of Ven0m</div>
-  //     <div>{isAuthenticated === true ? "You are loggedin" : ""}</div>
-  //     {isAuthenticated === false ? (
-  //       <div>
-  //         <nav>
-  //           <Link to="/signup">Sign Up</Link>
-  //         </nav>
-  //         <nav>
-  //           <Link to="/signin">Sign In</Link>
-  //         </nav>
-  //       </div>
-  //     ) : null}
-  //   </div>
-  // );
-
   return (
     <div>
       <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />

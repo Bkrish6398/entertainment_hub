@@ -4,12 +4,24 @@ import Button from "@mui/material/Button";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import checkIfUserAithenticated from "../Auth/UserAuth";
 import axios from "axios";
+import logo from "../Media/Ludo E-Sports-logos_transparent_Resized2.png";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 function SignInPage() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = React.useState("");
   const [userPassword, setUserPassword] = React.useState("");
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
+  const myStyle = {
+    padding: "10px",
+  };
 
   React.useEffect(() => {
     //check if user is already logged in
@@ -68,34 +80,49 @@ function SignInPage() {
       });
   };
   return (
-    <div>
-      This is the sign in
-      <div>
-        <TextField
-          required={true}
-          id="outlined-fname-input"
-          label="Email"
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" color="transparent">
+        <Toolbar style={{ height: "10px" }}>
+          <img src={logo} />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Ludo E-Sports
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div style={myStyle}>
+        <div>
+          This is the sign in
+          <div>
+            <TextField
+              required={true}
+              id="outlined-fname-input"
+              label="Email"
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
 
-        <TextField
-          required={true}
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          onChange={(e) => setUserPassword(e.target.value)}
-        />
-        <Button variant="outlined" onClick={handleSignIn}>
-          Submit
-        </Button>
+            <TextField
+              required={true}
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              onChange={(e) => setUserPassword(e.target.value)}
+            />
+            <Button variant="outlined" onClick={handleSignIn}>
+              Submit
+            </Button>
+          </div>
+          <div>
+            <nav>
+              <Link to="/">Home</Link>
+              <div>
+                <Link to="/signup">Create new account</Link>
+              </div>
+            </nav>
+          </div>
+        </div>
       </div>
-      <div>
-        <nav>
-          <Link to="/">Home</Link>
-        </nav>
-      </div>
-    </div>
+    </Box>
   );
 }
 
