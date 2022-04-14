@@ -15,6 +15,8 @@ import { Button } from "@mui/material";
 import { Routes, Route, Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import { useNavigate } from "react-router-dom";
+import logo from "../Media/Ludo E-Sports-logos_transparent_Resized2.png";
+import { height } from "@mui/system";
 
 function NavMenu(props) {
   let navigate = useNavigate();
@@ -45,9 +47,10 @@ function NavMenu(props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="transparent">
-        <Toolbar>
+        <Toolbar style={{ height: "10px" }}>
+          <img src={logo} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Ven0m
+            Ludo E-Sports
           </Typography>
           {props.isAuthenticated ? (
             <div>

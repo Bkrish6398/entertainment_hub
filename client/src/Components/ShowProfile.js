@@ -1,5 +1,6 @@
 import React from "react";
 import checkIfUserAithenticated from "../Auth/UserAuth";
+import NavMenu from "./NavMenu";
 function ShowProfile() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [loggedInUser, setLoggedInUser] = React.useState({});
@@ -27,8 +28,9 @@ function ShowProfile() {
   }, []);
   return (
     <div>
+      <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />
       {isAuthenticated ? (
-        <div>Show Profile</div>
+        <div>Your Profile</div>
       ) : (
         <div>You are not authenticated</div>
       )}
