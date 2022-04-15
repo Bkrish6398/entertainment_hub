@@ -30,7 +30,14 @@ function ShowProfile() {
     <div>
       <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />
       {isAuthenticated ? (
-        <div>Your Profile</div>
+        <div>
+          <div>Your Profile</div>
+          <div>
+            Full Name: {loggedInUser.firstName} {loggedInUser.lastName}
+          </div>
+          <div>Email: {loggedInUser.email}</div>
+          <div>Role: {loggedInUser.role}</div>
+        </div>
       ) : (
         <div>You are not authenticated</div>
       )}

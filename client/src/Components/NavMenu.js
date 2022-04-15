@@ -48,7 +48,12 @@ function NavMenu(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="transparent">
         <Toolbar style={{ height: "10px" }}>
-          <img src={logo} />
+          <img
+            alt="logo"
+            src={logo}
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ludo E-Sports
           </Typography>
