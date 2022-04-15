@@ -8,10 +8,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import NavMenu from "./NavMenu";
+import PlayerCards from "./PlayerCards";
 
 function HomePage() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [loggedInUser, setLoggedInUser] = React.useState({});
+
+  const playerCardStyle = {
+    paddingTop: "20px",
+  };
 
   React.useEffect(() => {
     //check if user is already logged in
@@ -37,7 +42,19 @@ function HomePage() {
 
   return (
     <div>
-      <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />
+      <div>
+        <NavMenu isAuthenticated={isAuthenticated} user={loggedInUser} />
+      </div>
+
+      {isAuthenticated === true ? (
+        <div>
+          <div style={playerCardStyle}>
+            <PlayerCards />
+          </div>
+        </div>
+      ) : (
+        <div>Please login</div>
+      )}
     </div>
   );
 }
